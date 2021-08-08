@@ -19,35 +19,30 @@ class ViewController: UIViewController, UITableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.items = UserDefaults.standard.stringArray(forKey: "items") ?? []
+        updateTasks()
         print("self.items", self.items)
         title = "My Todo List"
         view.addSubview(table)
         table.dataSource = self
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
-        // Do any additional setup after loading the view.
     }
     
     @objc private func didTapAdd() {
-        let alert = UIAlertController(title: "New Item", message: "Enter new item", preferredStyle: .alert)
-        alert.addTextField{field in field.placeholder = "Enter item"}
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { [weak self] (_) in
-            if let field = alert.textFields?.first {
-                if let text = field.text, !text.isEmpty {
-                    DispatchQueue.main.async {
-                        var currentItems = UserDefaults.standard.stringArray(forKey: "items") ?? []
-                        currentItems.append(text)
-                        UserDefaults.standard.setValue(currentItems, forKey: "items")
-                        self?.items.append(text)
-                        self?.table.reloadData()
-                    }
-                }
+        let vc = storyboard?.instantiateViewController(identifier: "entry") as! EntryViewController
+        vc.title = "New task"
+        vc.update = {
+            DispatchQueue.main.async {
+                self.updateTasks()
             }
-        }))
-        present(alert, animated: true)
+        }
+        navigationController?.pushViewController(vc, animated: true)
     }
     
+    private func updateTasks() {
+        items = UserDefaults.standard.stringArray(forKey: "items") ?? []
+        table.reloadData()
+    }
+        
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         table.frame = view.bounds
@@ -62,7 +57,5 @@ class ViewController: UIViewController, UITableViewDataSource {
         cell.textLabel?.text = items[indexPath.row]
         return cell
     }
-
-
 }
 

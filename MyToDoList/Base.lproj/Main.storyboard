@@ -42,6 +42,57 @@
             </objects>
             <point key="canvasLocation" x="34.782608695652179" y="87.723214285714278"/>
         </scene>
+        <!--Task View Controller-->
+        <scene sceneID="myO-9t-71b">
+            <objects>
+                <viewController storyboardIdentifier="task" id="eth-dA-3he" customClass="TaskViewController" customModule="MyToDoList" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0eX-0e-xvf" customClass="Task">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Dhk-9X-bgn"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G1D-zU-XUW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1933" y="88"/>
+        </scene>
+        <!--Entry View Controller-->
+        <scene sceneID="pOY-B3-UP3">
+            <objects>
+                <viewController storyboardIdentifier="entry" id="OgK-Sp-iUS" customClass="EntryViewController" customModule="MyToDoList" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6y0-aw-DWJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QBE-cG-6PU">
+                                <rect key="frame" x="20" y="64" width="374" height="94"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="4fU-Cb-v85"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="97" id="WTj-2u-1bh"/>
+                                    <constraint firstAttribute="width" constant="300" id="bvK-t4-QQO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="GU5-34-w61"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="GU5-34-w61" firstAttribute="bottom" secondItem="QBE-cG-6PU" secondAttribute="bottom" constant="704" id="2Iv-mD-DgS"/>
+                            <constraint firstItem="QBE-cG-6PU" firstAttribute="leading" secondItem="GU5-34-w61" secondAttribute="leading" constant="20" id="Lr3-I9-ZwQ"/>
+                            <constraint firstItem="GU5-34-w61" firstAttribute="trailing" secondItem="QBE-cG-6PU" secondAttribute="trailing" constant="20" id="RqW-Xh-tCf"/>
+                            <constraint firstItem="QBE-cG-6PU" firstAttribute="top" secondItem="GU5-34-w61" secondAttribute="top" constant="20" id="zdC-pn-k9r"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="field" destination="QBE-cG-6PU" id="6gO-ob-1io"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bdj-Uh-a0V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="635" y="733"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
