@@ -7,24 +7,27 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UIViewController {
     
     var items = [String]()
     
-    private let table: UITableView = {
-        let table = UITableView()
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        return table
-    }()
+    @IBOutlet var tableView: UITableView!
+    
+//    private let table: UITableView = {
+//        let table = UITableView()
+//        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+//        return table
+//    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         updateTasks()
         print("self.items", self.items)
         title = "My Todo List"
-        view.addSubview(table)
-        table.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
+        updateTasks()
     }
     
     @objc private func didTapAdd() {
@@ -40,13 +43,28 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     private func updateTasks() {
         items = UserDefaults.standard.stringArray(forKey: "items") ?? []
-        table.reloadData()
+        print(items)
+        tableView.reloadData()
     }
         
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        table.frame = view.bounds
-    }
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        table.frame = view.bounds
+//    }
+
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        print("1 before push")
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        let vc = storyboard?.instantiateViewController(identifier: "task") as! TaskViewController
+//        vc.title = "Edit task"
+//        vc.task = items[indexPath.row]
+//        print("2 before push")
+//        navigationController?.pushViewController(vc, animated: true)
+//    }
+    
+}
+
+extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
@@ -57,5 +75,17 @@ class ViewController: UIViewController, UITableViewDataSource {
         cell.textLabel?.text = items[indexPath.row]
         return cell
     }
+    
 }
 
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("1 before push")
+        tableView.deselectRow(at: indexPath, animated: true)
+        let vc = storyboard?.instantiateViewController(identifier: "task") as! TaskViewController
+        vc.title = "Edit task"
+        vc.task = items[indexPath.row]
+        print("2 before push")
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
