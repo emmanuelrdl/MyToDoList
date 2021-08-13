@@ -11,6 +11,8 @@ class TaskViewController: UIViewController {
 
     @IBOutlet var label: UILabel!
     var task: String?
+    var update: (() -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         label.text = task
@@ -22,7 +24,7 @@ class TaskViewController: UIViewController {
         var currentItems = UserDefaults.standard.stringArray(forKey: "items") ?? []
         currentItems = currentItems.filter(){$0 != task}
         UserDefaults.standard.setValue(currentItems, forKey: "items")
+        update?()
         navigationController?.popViewController(animated: true)
-        
     }
 }

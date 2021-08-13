@@ -43,24 +43,8 @@ class ViewController: UIViewController {
     
     private func updateTasks() {
         items = UserDefaults.standard.stringArray(forKey: "items") ?? []
-        print(items)
         tableView.reloadData()
     }
-        
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        table.frame = view.bounds
-//    }
-
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("1 before push")
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        let vc = storyboard?.instantiateViewController(identifier: "task") as! TaskViewController
-//        vc.title = "Edit task"
-//        vc.task = items[indexPath.row]
-//        print("2 before push")
-//        navigationController?.pushViewController(vc, animated: true)
-//    }
     
 }
 
@@ -80,12 +64,15 @@ extension ViewController: UITableViewDataSource {
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("1 before push")
         tableView.deselectRow(at: indexPath, animated: true)
         let vc = storyboard?.instantiateViewController(identifier: "task") as! TaskViewController
         vc.title = "Edit task"
+        vc.update = {
+            DispatchQueue.main.async {
+                self.updateTasks()
+            }
+        }
         vc.task = items[indexPath.row]
-        print("2 before push")
         navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -111,21 +111,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uoN-QU-eD4">
-                                <rect key="frame" x="12" y="56" width="390" height="794"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uoN-QU-eD4">
+                                <rect key="frame" x="39" y="121" width="336" height="90"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gWy-Ex-yrV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="uoN-QU-eD4" firstAttribute="top" secondItem="gWy-Ex-yrV" secondAttribute="top" constant="12" id="1pr-Hd-qhg"/>
-                            <constraint firstItem="gWy-Ex-yrV" firstAttribute="bottom" secondItem="uoN-QU-eD4" secondAttribute="bottom" constant="12" id="8cm-f4-i6g"/>
-                            <constraint firstItem="gWy-Ex-yrV" firstAttribute="trailing" secondItem="uoN-QU-eD4" secondAttribute="trailing" constant="12" id="Ey0-x0-Eon"/>
-                            <constraint firstItem="uoN-QU-eD4" firstAttribute="leading" secondItem="gWy-Ex-yrV" secondAttribute="leading" constant="12" id="y69-rX-OeU"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="label" destination="uoN-QU-eD4" id="THx-d9-F8C"/>
