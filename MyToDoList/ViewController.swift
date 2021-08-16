@@ -9,16 +9,10 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var items = [String]()
+    var items = [Item]()
     
     @IBOutlet var tableView: UITableView!
     
-//    private let table: UITableView = {
-//        let table = UITableView()
-//        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-//        return table
-//    }()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         updateTasks()
@@ -27,7 +21,6 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
-        updateTasks()
     }
     
     @objc private func didTapAdd() {
@@ -42,21 +35,30 @@ class ViewController: UIViewController {
     }
     
     private func updateTasks() {
-        items = UserDefaults.standard.stringArray(forKey: "items") ?? []
-        tableView.reloadData()
+        TaskGateway().readTasks() { (data) in
+            if let values = data as? [Item] {
+                self.items = values
+                print("self.items")
+                print(self.items)
+            } else {
+                // we have something else
+            }
+            self.tableView.reloadData()
+        }
     }
-    
 }
 
 extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return self.items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = items[indexPath.row]
+        print("table view items")
+        print(self.items)
+        cell.textLabel?.text = self.items[indexPath.row].label
         return cell
     }
     
@@ -72,7 +74,7 @@ extension ViewController: UITableViewDelegate {
                 self.updateTasks()
             }
         }
-        vc.task = items[indexPath.row]
+        vc.task = self.items[indexPath.row].label
         navigationController?.pushViewController(vc, animated: true)
     }
 }

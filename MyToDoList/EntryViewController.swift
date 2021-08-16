@@ -26,12 +26,13 @@ class EntryViewController: UIViewController, UITextFieldDelegate {
     
     @objc func saveTask() {
         
-        guard let text = field.text, !text.isEmpty else {
+        guard let task = field.text, !task.isEmpty else {
             return
         }
         
         var currentItems = UserDefaults.standard.stringArray(forKey: "items") ?? []
-        currentItems.append(text)
+        currentItems.append(task)
+        TaskGateway().createTask(task: task)
         UserDefaults.standard.setValue(currentItems, forKey: "items")
         update?()
         navigationController?.popViewController(animated: true)
